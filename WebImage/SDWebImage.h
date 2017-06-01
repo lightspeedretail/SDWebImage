@@ -21,6 +21,11 @@ FOUNDATION_EXPORT const unsigned char WebImageVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <WebImage/PublicHeader.h>
 
+// We get a compiler error if we don't include FLAnimatedImage.h here, given that it's a public header of the framework.
+// A PR to fix this upstream was already in progress, so this should be resolved in the next release.
+// See: https://github.com/rs/SDWebImage/issues/1776
+#import "FLAnimatedImage.h"
+
 #import <SDWebImage/SDWebImageManager.h>
 #import <SDWebImage/SDImageCacheConfig.h>
 #import <SDWebImage/SDImageCache.h>
