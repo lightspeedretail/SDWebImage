@@ -1016,9 +1016,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4A2CAE121AB4BB5400B6BC39 /* Build configuration list for PBXNativeTarget "SDWebImage" */;
 			buildPhases = (
+				4A2CADFC1AB4BB5300B6BC39 /* Headers */,
 				4A2CADFA1AB4BB5300B6BC39 /* Sources */,
 				4A2CADFB1AB4BB5300B6BC39 /* Frameworks */,
-				4A2CADFC1AB4BB5300B6BC39 /* Headers */,
 				4A2CADFD1AB4BB5300B6BC39 /* Resources */,
 			);
 			buildRules = (
@@ -1034,9 +1034,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 53761322155AD0D5005750A4 /* Build configuration list for PBXNativeTarget "SDWebImage static" */;
 			buildPhases = (
+                326C15A122A4E8AD0001F663 /* Copy Headers */,
 				53761308155AD0D5005750A4 /* Sources */,
 				53761311155AD0D5005750A4 /* Frameworks */,
-				326C15A122A4E8AD0001F663 /* Copy Headers */,
 			);
 			buildRules = (
 			);
@@ -1051,9 +1051,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 80B6DFEB2142B71600BCB334 /* Build configuration list for PBXNativeTarget "SDWebImageMapKit" */;
 			buildPhases = (
+                80B6DFB82142B71600BCB334 /* Headers */,
 				80B6DF872142B71600BCB334 /* Sources */,
 				80B6DFB72142B71600BCB334 /* Frameworks */,
-				80B6DFB82142B71600BCB334 /* Headers */,
 				80B6DFEA2142B71600BCB334 /* Resources */,
 			);
 			buildRules = (
