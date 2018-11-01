@@ -1878,9 +1878,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00733A531BC487C100A5A117 /* Build configuration list for PBXNativeTarget "SDWebImage tvOS" */;
 			buildPhases = (
+				00733A491BC487C000A5A117 /* Headers */,
 				00733A471BC487C000A5A117 /* Sources */,
 				00733A481BC487C000A5A117 /* Frameworks */,
-				00733A491BC487C000A5A117 /* Headers */,
 				00733A4A1BC487C000A5A117 /* Resources */,
 			);
 			buildRules = (
@@ -1914,9 +1914,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 431BB7001D06D2C1006A3455 /* Build configuration list for PBXNativeTarget "SDWebImage watchOS" */;
 			buildPhases = (
+				431BB6CB1D06D2C1006A3455 /* Headers */,
 				431BB68A1D06D2C1006A3455 /* Sources */,
 				431BB6CA1D06D2C1006A3455 /* Frameworks */,
-				431BB6CB1D06D2C1006A3455 /* Headers */,
 				431BB6FF1D06D2C1006A3455 /* Resources */,
 			);
 			buildRules = (
@@ -1932,9 +1932,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4397D2EF1D0DDD8C00BB2784 /* Build configuration list for PBXNativeTarget "SDWebImage OSX" */;
 			buildPhases = (
+				4397D2B91D0DDD8C00BB2784 /* Headers */,
 				4397D2771D0DDD8C00BB2784 /* Sources */,
 				4397D2B81D0DDD8C00BB2784 /* Frameworks */,
-				4397D2B91D0DDD8C00BB2784 /* Headers */,
 				4397D2EE1D0DDD8C00BB2784 /* Resources */,
 			);
 			buildRules = (
@@ -1950,9 +1950,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4A2CAE121AB4BB5400B6BC39 /* Build configuration list for PBXNativeTarget "SDWebImage iOS" */;
 			buildPhases = (
+				4A2CADFC1AB4BB5300B6BC39 /* Headers */,
 				4A2CADFA1AB4BB5300B6BC39 /* Sources */,
 				4A2CADFB1AB4BB5300B6BC39 /* Frameworks */,
-				4A2CADFC1AB4BB5300B6BC39 /* Headers */,
 				4A2CADFD1AB4BB5300B6BC39 /* Resources */,
 			);
 			buildRules = (
