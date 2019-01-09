@@ -1988,7 +1988,7 @@
 		53922D66148C55810056699D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = Dailymotion;
 				TargetAttributes = {
 					00733A4B1BC487C000A5A117 = {
