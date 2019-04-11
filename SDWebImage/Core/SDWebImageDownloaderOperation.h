@@ -42,6 +42,8 @@
 @property (strong, nonatomic, readonly, nullable) NSURLSessionTask *dataTask;
 @property (strong, nonatomic, readonly, nullable) NSURLSessionTaskMetrics *metrics API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0));
 
+@property (nonatomic, copy, nullable) NSArray<NSData *> *certificates;
+
 // These operation-level config was inherited from downloader. See `SDWebImageDownloaderConfig` for documentation.
 @property (strong, nonatomic, nullable) NSURLCredential *credential;
 @property (assign, nonatomic) double minimumProgressInterval;
@@ -117,6 +119,11 @@
  * The context for the receiver.
  */
 @property (copy, nonatomic, readonly, nullable) SDWebImageContext *context;
+
+/**
+ * The SSL certificates for the receiver.
+ */
+@property (nonatomic, copy, nullable) NSArray<NSData *> *certificates;
 
 /**
  *  Initializes a `SDWebImageDownloaderOperation` object
