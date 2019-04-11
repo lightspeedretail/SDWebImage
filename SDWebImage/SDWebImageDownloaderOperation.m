@@ -462,7 +462,11 @@ didReceiveResponse:(NSURLResponse *)response
     __block NSURLCredential *credential = nil;
     
     if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust]) {
-        if (!(self.options & SDWebImageDownloaderAllowInvalidSSLCertificates)) {
+        BOOL trustThisChallenge = (self.options & SDWebImageDownloaderAllowInvalidSSLCertificates);
+        if (self.certificates.count > 0 && (self.options & SDWebImageDownloaderUseSpecifiedSSLCertificates)) {
+            trustThisChallenge = [self validateCertificatesForChallenge:challenge];
+        }
+        if (!trustThisChallenge) {
             disposition = NSURLSessionAuthChallengePerformDefaultHandling;
         } else {
             credential = [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];
@@ -484,6 +488,72 @@ didReceiveResponse:(NSURLResponse *)response
     if (completionHandler) {
         completionHandler(disposition, credential);
     }
+}
+
+- (BOOL)validateCertificatesForChallenge:(NSURLAuthenticationChallenge *)challenge {
+    SecTrustRef serverTrust = challenge.protectionSpace.serverTrust;
+
+    CFIndex count = SecTrustGetCertificateCount(serverTrust);
+    if (count == 0)
+    {
+        // There should be at least one certificate in the challenge
+        return NO;
+    }
+
+    // Evaluate the certificate on its merits
+    // Since we'll be evaluating it based on our own trust chain below, the only acceptable results are
+    // "RecoverableTrustFailure" (which means we could validate it with the right info) and "Unspecified",
+    // (which means there are no objections to this certificate being valid).
+    // Other trust results such as "Invalid" or "Proceed" imply some sort of user interaction to approve
+    // the certificate, which would defeat the purpose of this validation since the user would simply
+    // have to add a self-signed, root certificate to their Keychain and use it to generate a license
+    // that would be implicitly trusted by the client.
+    SecTrustResultType trustResult;
+    OSStatus status = SecTrustEvaluate(serverTrust, &trustResult);
+    if (status != errSecSuccess || (trustResult != kSecTrustResultRecoverableTrustFailure && trustResult != kSecTrustResultUnspecified))
+    {
+        // Unable to evaluate serverTrust
+        return NO;
+    }
+
+    // The certificate is either recoverable or unspecified.
+    // Recoverable means that with some tweaks (like adding a trusted certificate) it could become trusted.
+    // Unspecified means that there's no reason not to trust it
+    // In either case, we want to change the policy to trust our certificate because (a) we want to evaluate
+    // the certificate only based on our trusted certificate and (b) we want to avoid trusting any random
+    // trusted certificate that a fake server could throw at us.
+
+    // Create an SSL policy that ignores hostnames (second parameter is NULL)
+    SecPolicyRef sslPolicy = SecPolicyCreateSSL(true, NULL);
+    status = SecTrustSetPolicies(serverTrust, sslPolicy);
+    if (status != errSecSuccess)
+    {
+        // Unable to set SSL policy for trust
+        CFRelease(sslPolicy);
+        return NO;
+    }
+
+    // Add the trusted certificates to the trust policy
+    NSMutableArray *secCerts = [NSMutableArray arrayWithCapacity:self.certificates.count];
+    for (NSData *oneCert in self.certificates) {
+        SecCertificateRef oneSecCert = SecCertificateCreateWithData(NULL, (__bridge CFDataRef)oneCert);
+        [secCerts addObject:(__bridge_transfer id)oneSecCert];
+    }
+    status = SecTrustSetAnchorCertificates(serverTrust, (CFArrayRef)secCerts);
+    if (status != errSecSuccess)
+    {
+        // Unable to set anchor certificates
+        CFRelease(sslPolicy);
+        return NO;
+    }
+
+    // Run the evaluation again
+    SecTrustEvaluate(serverTrust, &trustResult);
+
+    CFRelease(sslPolicy);
+
+    // Unspecified means no reason not to trust
+    return (trustResult == kSecTrustResultUnspecified);
 }
 
 #pragma mark Helper methods

@@ -54,6 +54,12 @@ typedef NS_OPTIONS(NSUInteger, SDWebImageDownloaderOptions) {
      * Scale down the image
      */
     SDWebImageDownloaderScaleDownLargeImages = 1 << 8,
+
+    /**
+     * Enable to allow the trust verification by using
+     * certificates provided in the `certificates` property
+     */
+    SDWebImageDownloaderUseSpecifiedSSLCertificates = 1 << 9,
 };
 
 typedef NS_ENUM(NSInteger, SDWebImageDownloaderExecutionOrder) {
@@ -229,5 +235,11 @@ typedef SDHTTPHeadersDictionary * _Nullable (^SDWebImageDownloaderHeadersFilterB
  * Cancels all download operations in the queue
  */
 - (void)cancelAllDownloads;
+
+/**
+ * Set SSL certificates for basic validation with self-signed certificates
+ * (use with caution)
+ */
+- (void)updateCertificates:(NSArray <NSData *> * _Nullable)certificates;
 
 @end

@@ -27,6 +27,9 @@
 // The session in which data tasks will run
 @property (strong, nonatomic) NSURLSession *session;
 
+// The certificates to use for validation, if any
+@property (copy, nonatomic, nullable) NSArray<NSData *> *certificates;
+
 @end
 
 @implementation SDWebImageDownloader
@@ -164,7 +167,8 @@
         }
         SDWebImageDownloaderOperation *operation = [[sself.operationClass alloc] initWithRequest:request inSession:sself.session options:options];
         operation.shouldDecompressImages = sself.shouldDecompressImages;
-        
+        operation.certificates = sself.certificates;
+
         if (sself.urlCredential) {
             operation.credential = sself.urlCredential;
         } else if (sself.username && sself.password) {
@@ -243,6 +247,10 @@
 
 - (void)cancelAllDownloads {
     [self.downloadQueue cancelAllOperations];
+}
+
+- (void)updateCertificates:(NSArray <NSData *> * _Nullable)certificates {
+    self.certificates = certificates;
 }
 
 #pragma mark Helper methods
