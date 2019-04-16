@@ -72,6 +72,11 @@ extern NSString * _Nonnull const SDWebImageDownloadFinishNotification;
 @property (assign, nonatomic, readonly) SDWebImageDownloaderOptions options;
 
 /**
+ * The SSL certificates for the receiver.
+ */
+@property (nonatomic, copy, nullable) NSArray<NSData *> *certificates;
+
+/**
  * The expected size of data.
  */
 @property (assign, nonatomic) NSInteger expectedSize;
