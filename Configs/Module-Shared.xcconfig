@@ -4,6 +4,9 @@
 // This setting is deprecated as of Xcode 8.3 and may not be supported in future versions. It is recommended that you disable the setting. If enabled, both `#include <header.h>`-style and `#include "header.h"`-style directives search the paths in `USER_HEADER_SEARCH_PATHS` before `HEADER_SEARCH_PATHS`
 ALWAYS_SEARCH_USER_PATHS = NO
 
+// Warn when a nonlocalized string is passed to a user interface method expecting a localized string.
+CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+
 // Warn for missing nullability attributes
 CLANG_ANALYZER_NONNULL = YES
 
