@@ -93,6 +93,12 @@ typedef NS_OPTIONS(NSUInteger, SDWebImageDownloaderOptions) {
      * Note this options is not compatible with `SDWebImageDownloaderDecodeFirstFrameOnly`, which always produce a UIImage/NSImage.
      */
     SDWebImageDownloaderMatchAnimatedImageClass = 1 << 12,
+
+    /**
+     * Enable to allow the trust verification by using
+     * certificates provided in the `certificates` property
+     */
+    SDWebImageDownloaderUseSpecifiedSSLCertificates = 1 << 13,
 };
 
 FOUNDATION_EXPORT NSNotificationName _Nonnull const SDWebImageDownloadStartNotification;
@@ -300,6 +306,12 @@ typedef SDImageLoaderCompletedBlock SDWebImageDownloaderCompletedBlock;
  * @note Calling this method on the shared downloader has no effect.
  */
 - (void)invalidateSessionAndCancel:(BOOL)cancelPendingOperations;
+
+/**
+ * Set SSL certificates for basic validation with self-signed certificates
+ * (use with caution)
+ */
+- (void)updateCertificates:(NSArray <NSData *> * _Nullable)certificates;
 
 @end
 

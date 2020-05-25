@@ -39,6 +39,7 @@
 @property (strong, nonatomic, readonly, nullable) NSURLSessionTaskMetrics *metrics API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0));
 @property (strong, nonatomic, nullable) NSURLCredential *credential;
 @property (assign, nonatomic) double minimumProgressInterval;
+@property (copy, nonatomic, nullable) NSArray<NSData *> *certificates;
 
 @end
 
@@ -89,6 +90,11 @@
  * The options for the receiver.
  */
 @property (assign, nonatomic, readonly) SDWebImageDownloaderOptions options;
+
+/**
+ * The SSL certificates for the receiver.
+ */
+@property (nonatomic, copy, nullable) NSArray<NSData *> *certificates;
 
 /**
  * The context for the receiver.
